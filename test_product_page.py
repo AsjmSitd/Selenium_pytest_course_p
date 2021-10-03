@@ -62,6 +62,35 @@ def test_guest_cant_see_product_in_basket_opened_from_product_page(browser):
     bp.should_be_msg()
 
 
+
+@pytest.mark.xfail
+def test_guest_cant_see_success_message_after_adding_product_to_basket(browser):
+    link = "http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/"
+    page = MainPage(browser, link)
+    page.open()
+    pp = ProductPage(browser, browser.current_url)
+    pp.shoul_click_add_to_basket_btn()
+    pp.should_not_be_success_message()
+
+
+def test_guest_cant_see_success_message(browser):
+    link = "http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/"
+    page = MainPage(browser, link)
+    page.open()
+    pp = ProductPage(browser, browser.current_url)
+    pp.should_not_be_success_message()
+
+
+@pytest.mark.xfail
+def test_message_disappeared_after_adding_product_to_basket(browser):
+    link = "http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/"
+    page = MainPage(browser, link)
+    page.open()
+    pp = ProductPage(browser, browser.current_url)
+    pp.shoul_click_add_to_basket_btn()
+    pp.should_not_be_success_message_1()
+    
+    
 class TestUserAddToBasketFromProductPage:
     @pytest.fixture(scope="function")
     def setup(self, browser):
@@ -94,32 +123,4 @@ class TestUserAddToBasketFromProductPage:
         page.open()
         pp = ProductPage(browser, browser.current_url)
         pp.should_not_be_success_message()
-
-
-@pytest.mark.xfail
-def test_guest_cant_see_success_message_after_adding_product_to_basket(browser):
-    link = "http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/"
-    page = MainPage(browser, link)
-    page.open()
-    pp = ProductPage(browser, browser.current_url)
-    pp.shoul_click_add_to_basket_btn()
-    pp.should_not_be_success_message()
-
-
-def test_guest_cant_see_success_message(browser):
-    link = "http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/"
-    page = MainPage(browser, link)
-    page.open()
-    pp = ProductPage(browser, browser.current_url)
-    pp.should_not_be_success_message()
-
-
-@pytest.mark.xfail
-def test_message_disappeared_after_adding_product_to_basket(browser):
-    link = "http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/"
-    page = MainPage(browser, link)
-    page.open()
-    pp = ProductPage(browser, browser.current_url)
-    pp.shoul_click_add_to_basket_btn()
-    pp.should_not_be_success_message_1()
 
